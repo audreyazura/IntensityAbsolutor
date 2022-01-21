@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 
 /**
  *
- * @author audreyazura
+ * @author Alban Lafuente
  */
 public class PopupController
 {

@@ -15,7 +15,7 @@ import java.util.Map;
 
 /**
  *
- * @author audreyazura
+ * @author Alban Lafuente
  */
 public class CalculationManager implements Runnable
 {
