@@ -10,7 +10,11 @@ A software to calculate the absolute intensity of spectra taken in the integrati
 
 # Adding new callibration light
 New callibration lights can be added by adding a file in the `ressources/ReferenceIntensities` folder.
+
 This must be a text file with the `.intensity` extension.
+
 The data must be formated as two numbers seperated by a single tabulation. The first column represent the wavelength of the emission in nm, and the second colum represent the intensity of the emission at that wavelength in W/nm.
+
 Any line of text will be ignore.
+
 Files not following this format will not be read properly and may lead to bugs.
