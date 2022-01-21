@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- You may freely edit this file. See commented blocks below for -->
+<!-- some examples of how to customize the build. -->
+<!-- (If you delete it and reopen the project it will be recreated.) -->
+<!-- By default, only the Clean and Build commands use this build script. -->
+<!-- Commands such as Run, Debug, and Test only use this build script if -->
+<!-- the Compile on Save feature is turned off for the project. -->
+<!-- You can turn off the Compile on Save (or Deploy on Save) setting -->
+<!-- in the project's Project Properties dialog box.-->
+<project name="IntensityAbsolutor" default="default" basedir="." xmlns:j2semodularproject="http://www.netbeans.org/ns/j2se-modular-project/1">
+    <description>Builds, tests, and runs the project IntensityAbsolutor.</description>
+    <import file="nbproject/build-impl.xml"/>
+    <!--
+
+    There exist several targets which are by default empty and which can be 
+    used for execution of your tasks. These targets are usually executed 
+    before and after some main targets. They are: 
+
+      -pre-init:                 called before initialization of project properties
+      -post-init:                called after initialization of project properties
+      -pre-compile:              called before javac compilation
+      -post-compile:             called after javac compilation
+      -pre-compile-single:       called before javac compilation of single file
+      -post-compile-single:      called after javac compilation of single file
+      -pre-compile-test:         called before javac compilation of JUnit tests
+      -post-compile-test:        called after javac compilation of JUnit tests
+      -pre-compile-test-single:  called before javac compilation of single JUnit test
+      -post-compile-test-single: called after javac compilation of single JUunit test
+      -pre-jar:                  called before JAR building
+      -post-jar:                 called after JAR building
+      -post-clean:               called after cleaning build products
+
+    (Targets beginning with '-' are not intended to be called on their own.)
+
+    Example of inserting an obfuscator after compilation could look like this:
+
+        <target name="-post-compile">
+            <obfuscate>
+                <fileset dir="${build.classes.dir}"/>
+            </obfuscate>
+        </target>
+
+    For list of available properties check the imported 
+    nbproject/build-impl.xml file. 
+
+
+    Another way to customize the build is by overriding existing main targets.
+    The targets of interest are: 
+
+      -init-macrodef-javac:     defines macro for javac compilation
+      -init-macrodef-junit:     defines macro for junit execution
+      -init-macrodef-debug:     defines macro for class debugging
+      -init-macrodef-java:      defines macro for class execution
+      -do-jar:                  JAR building
+      run:                      execution of project 
+      -javadoc-build:           Javadoc generation
+      test-report:              JUnit report generation
+
+    Notice that the overridden target depends on the jar target and not only on 
+    the compile target as the regular run target does. Again, for a list of available 
+    properties which you can use, check the target you are overriding in the
+    nbproject/build-impl.xml file. 
+
+    -->
+    
+    <target name="-post-deploy" xmlns:if="ant:if">
+        <!--réduction de la taille de la jvm Linux-->
+        <echo message="Reducing the Linux JVM size"/>
+        <property name="jvm.file.path" value="${dist.jlink.output}/lib/server/libjvm.so"/>
+        <exec executable="strip">
+            <arg value="-p"/>
+            <arg value="--strip-unneeded"/>
+            <arg path="${jvm.file.path}"/>
+        </exec>
+        
+        <echo message="Creating the archive file for Linux"/>
+        <delete dir="dist/portable" />
+        <mkdir dir="dist/portable" />
+        <zip destfile="dist/portable/${application.title}-linux.zip">
+            <fileset dir="dist" includes="*.jar" />
+            <fileset dir="dist" includes="jlink/${application.title}/" />
+            <fileset dir="." includes="ressources/ReferenceIntensities/" />
+            <fileset dir="startingscripts" includes="${application.title}-start.sh" />
+        </zip>
+        
+        <!--Production de la distribution JLink Windows-->
+        <echo message="Producing the JLINK for Windows"/>
+        <property name="dist.jlink.win.output" value="${dist.jlink.dir}/${application.title}-WIN"/>
+        <property name="win.platform.home" value="/home/audreyazura/Dev/Tools/Windows/jdk-17.0.1+12"/>
+        <property name="javafx.jmods.win.modulepath" value="home/audreyazura/Dev/Tools/Windows/javafx-jmods-17.0.1"/>
+        <property name="jlink.launcher.name" value="${application.title}"/>
+        <pathconvert pathsep="," property="jlink.modulelist.internal">
+            <fileset dir="${dist.dir}" includes="*.jar"/>
+            <mapper>
+                <chainedmapper>
+                    <flattenmapper/>
+                    <globmapper from="*.jar" to="*"/>
+                </chainedmapper>
+            </mapper>
+        </pathconvert>
+        <condition else="${jlink.modulelist.internal}" property="jlink.add.modules" value="${jlink.modulelist.internal},${jlink.additionalmodules}">
+            <and>
+                <isset property="jlink.additionalmodules"/>
+                <length length="0" string="${jlink.additionalmodules}" when="greater"/>
+            </and>
+        </condition>
+        <condition property="jlink.do.strip.internal">
+            <and>
+                <isset property="jlink.strip"/>
+                <istrue value="${jlink.strip}"/>
+            </and>
+        </condition>
+        <condition property="jlink.do.additionalparam.internal">
+            <and>
+                <isset property="jlink.additionalparam"/>
+                <length length="0" string="${jlink.additionalparam}" when="greater"/>
+            </and>
+        </condition>
+        <condition property="jlink.do.launcher.internal">
+            <and>
+                <istrue value="${jlink.launcher}"/>
+                <isset property="module.name"/>
+                <length length="0" string="${module.name}" when="greater"/>
+                <isset property="main.class.available"/>
+            </and>
+        </condition>
+        <property name="platform.jlink" value="${platform.home}/bin/jlink"/>
+        <property name="jlink.systemmodules.internal.win" value="${win.platform.home}/jmods"/>
+        <echo message="jlink.systemmodules.internal.win:${jlink.systemmodules.internal.win}"/>
+        <exec executable="${platform.jlink}">
+            <arg value="--module-path"/>
+            <arg path="${jlink.systemmodules.internal.win}:${javafx.jmods.win.modulepath}:${javac.modulepath}:${dist.dir}"/>
+            <arg value="--add-modules"/>
+            <arg value="${jlink.add.modules}"/>
+            <arg if:set="jlink.do.strip.internal" value="--strip-debug"/>
+            <arg if:set="jlink.do.launcher.internal" value="--launcher"/>
+            <arg if:set="jlink.do.launcher.internal" value="${jlink.launcher.name}=${module.name}/${main.class}"/>
+            <arg if:set="jlink.do.additionalparam.internal" line="${jlink.additionalparam}"/>
+            <arg value="--output"/>
+            <arg value="${dist.jlink.win.output}"/>
+        </exec>
+        
+        <echo message="Creating the archive file for Windows"/>
+        <zip destfile="dist/portable/${application.title}-windows.zip">
+            <fileset dir="dist" includes="*.jar" />
+            <fileset dir="dist" includes="jlink/${application.title}-WIN/" />
+            <fileset dir="." includes="ressources/ReferenceIntensities/" />
+            <fileset dir="startingscripts" includes="${application.title}-start.bat" />
+        </zip>
+        
+    </target>
+    
+</project>

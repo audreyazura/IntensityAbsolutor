@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+
+<VBox fx:controller="intensityabsolutor.gui.PopupController" xmlns:fx="http://javafx.com/fxml/1"
+      styleClass="mainvbox">
+    
+    <stylesheets>
+        <URL value="@WindowsStyle.css" />
+    </stylesheets>
+    
+    <Label styleClass="windowtext" fx:id="message"/>
+    
+    <HBox styleClass="popuphbox">
+        <Button text="OK" alignment="center" defaultButton="true" onAction="#close"/>
+    </HBox>
+</VBox>

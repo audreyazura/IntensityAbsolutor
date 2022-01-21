@@ -1,0 +1,142 @@
+/*
+Copyright (C) 2020 Alban Lafuente
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+/* 
+    Created on : 14 Apr 2020, 20:03:11
+    Author     : Alban Lafuente
+*/
+
+.button
+{
+    -fx-alignment: baseline-center;
+    -fx-font-family: SourceSansPro;
+}
+
+.configbutton
+{
+    -fx-text-alignment: center;
+    -fx-alignment: center;
+    -fx-font-family: SourceSansPro;
+    -fx-wrap-text: true;
+    -fx-pref-width: 130px;
+}
+
+.gridpane
+{
+    -fx-hgap: 10px;
+    -fx-vgap: 10px;
+    -fx-alignment: center-left;
+    -fx-border-style: solid;
+    -fx-padding: 10px 10px 10px 10px; /*top, right, bottom, left*/
+}
+
+.hbox
+{
+    -fx-spacing: 15px;
+    -fx-fill-height: true;
+    -fx-alignment: center-left;
+}
+
+.integrationtext
+{
+    -fx-font-family: SourceSansPro;
+    -fx-wrap-text: true;
+    -fx-alignment: center;
+    -fx-text-alignment: center;
+}
+
+.internalvbox
+{
+    -fx-spacing: 10px;
+    -fx-alignment: top-left;
+    -fx-fill-width: true;
+    -fx-border-style: solid;
+    -fx-padding: 10px 10px 10px 10px; /*top, right, bottom, left*/
+}
+
+.inputfield
+{
+    -fx-alignment: center-left;
+}
+
+.label
+{
+    -fx-font-family: SourceSansPro;
+    -fx-text-alignment: justify;
+}
+
+.lastvbox
+{
+    -fx-spacing: 10px;
+    -fx-alignment: top-left;
+    -fx-fill-width: true;
+    -fx-padding: 10px 0px 10px 0px; /*top, right, bottom, left*/
+}
+
+.mainvbox
+{
+    -fx-spacing: 10px;
+    -fx-alignment: top-left;
+    -fx-fill-width: true;
+    -fx-padding: 15px 20px 20px 20px; /*top, right, bottom, left*/
+}
+
+.popuphbox
+{
+    -fx-spacing: 15px;
+    -fx-fill-height: true;
+    -fx-alignment: center;
+}
+
+.titlelabel
+{
+    -fx-font-family: SourceSansPro;
+    -fx-text-alignment: justify;
+    -fx-font-size: 14;
+    -fx-font-weight: bold;
+}
+
+.windowtext
+{
+    -fx-font-family: SourceSansPro;
+    -fx-text-alignment: justify;
+}
+
+#startsimubox
+{
+    -fx-alignment: center;
+    -fx-font-family: SourceSansPro;
+    -fx-font-size: 20;
+    -fx-font-weight: bold;
+}
+
+#title
+{
+    -fx-text-alignment: center;
+    -fx-font-size: 20;
+    -fx-font-weight: bold;
+}
+
+#titlebox
+{
+    -fx-alignment: center;
+    -fx-padding: 0px 0px 5px 0px; /*top, right, bottom, left*/
+}
+
+#lastgrid
+{
+    -fx-border-style: null;
+}

@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import java.net.URL?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Priority?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+
+<VBox fx:controller="intensityabsolutor.gui.WindowController" xmlns:fx="http://javafx.com/fxml/1"
+      styleClass="mainvbox">
+    
+    <stylesheets>
+        <URL value="@WindowsStyle.css" />
+    </stylesheets>
+    
+    <HBox styleClass="hbox" fx:id="titlebox">
+        <Label styleClass="windowtext" fx:id="title" text="Absolute intensity calculator"/>
+    </HBox>
+    
+    <HBox styleClass="hbox">
+        <Label styleClass="windowtext" text="Callibration light:" />
+        <ChoiceBox fx:id="callibrationlight" onShown="#removedefault">
+        </ChoiceBox>
+    </HBox>
+    
+    <GridPane styleClass="gridpane">
+        <columnConstraints>
+            <ColumnConstraints hgrow="NEVER" />
+            <ColumnConstraints hgrow="ALWAYS" />
+            <ColumnConstraints hgrow="NEVER" />
+            <ColumnConstraints hgrow="NEVER" halignment="center" />
+        </columnConstraints>
+
+        <Label styleClass="titlelabel" text="Sample spectra" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="3" />
+        <Label styleClass="integrationtext" text="Integration time (s)" GridPane.columnIndex="3" GridPane.rowIndex="0" prefWidth="80" />
+        
+        <Label styleClass="windowtext" text="Files: " GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.halignment="right" GridPane.valignment="top" />
+        <TextArea styleClass="inputfield" fx:id="experiment" HBox.hgrow="ALWAYS" GridPane.columnIndex="1" GridPane.rowIndex="1" prefWidth="500" prefRowCount="3" />
+        <Button text="Browse" alignment="center" onAction="#browseSample" GridPane.columnIndex="2" GridPane.rowIndex="1" GridPane.valignment="top" />
+        <TextField styleClass="inputfield" fx:id="expintegration" GridPane.columnIndex="3" GridPane.rowIndex="1" maxWidth="60" GridPane.valignment="top" />
+        
+        <Label styleClass="windowtext" text="Background: " GridPane.columnIndex="0" GridPane.rowIndex="2" />
+        <TextField styleClass="inputfield" fx:id="bgexperiment" HBox.hgrow="ALWAYS" GridPane.columnIndex="1" GridPane.rowIndex="2" prefWidth="500" />
+        <Button text="Browse" alignment="center" onAction="#browseBGSample" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+        <TextField styleClass="inputfield" fx:id="expbgintegration" GridPane.columnIndex="3" GridPane.rowIndex="2" maxWidth="60" />
+    </GridPane>
+        
+    <GridPane styleClass="gridpane">
+        <columnConstraints>
+            <ColumnConstraints hgrow="NEVER" />
+            <ColumnConstraints hgrow="ALWAYS" />
+            <ColumnConstraints hgrow="NEVER" />
+            <ColumnConstraints hgrow="NEVER" halignment="center" />
+        </columnConstraints>
+
+        <Label styleClass="titlelabel" text="Callibration spectra" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="3" />
+        <Label styleClass="integrationtext" text="Integration time (s)" GridPane.columnIndex="3" GridPane.rowIndex="0" prefWidth="80" />
+        
+        <Label styleClass="windowtext" text="File: " GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.halignment="right" />
+        <TextField styleClass="inputfield" fx:id="callibration" HBox.hgrow="ALWAYS" GridPane.columnIndex="1" GridPane.rowIndex="1" prefWidth="500" />
+        <Button text="Browse" alignment="center" onAction="#browseCallibration" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+        <TextField styleClass="inputfield" fx:id="callintegration" GridPane.columnIndex="3" GridPane.rowIndex="1" maxWidth="60" />
+        
+        <Label styleClass="windowtext" text="Background: " GridPane.columnIndex="0" GridPane.rowIndex="2" />
+        <TextField styleClass="inputfield" fx:id="bgcallibration" HBox.hgrow="ALWAYS" GridPane.columnIndex="1" GridPane.rowIndex="2" prefWidth="500" />
+        <Button text="Browse" alignment="center" onAction="#browseBGCallibration" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+        <TextField styleClass="inputfield" fx:id="callbgintegration" GridPane.columnIndex="3" GridPane.rowIndex="2" maxWidth="60" />
+    </GridPane>
+    
+    <GridPane styleClass="gridpane">
+        <columnConstraints>
+            <ColumnConstraints hgrow="NEVER" />
+            <ColumnConstraints hgrow="ALWAYS" />
+            <ColumnConstraints hgrow="NEVER" />
+            <ColumnConstraints hgrow="NEVER" halignment="center" />
+        </columnConstraints>
+
+        <Label styleClass="titlelabel" text="White light spectra with sample" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="3" />
+        <Label styleClass="integrationtext" text="Integration time (s)" GridPane.columnIndex="3" GridPane.rowIndex="0" prefWidth="80" />
+        
+        <Label styleClass="windowtext" text="File: " GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.halignment="right" />
+        <TextField styleClass="inputfield" fx:id="whitelightwithsample" HBox.hgrow="ALWAYS" GridPane.columnIndex="1" GridPane.rowIndex="1" prefWidth="500" />
+        <Button text="Browse" alignment="center" onAction="#browseWhiteLightSample" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+        <TextField styleClass="inputfield" fx:id="wlsampleintegration" GridPane.columnIndex="3" GridPane.rowIndex="1" maxWidth="60" />
+        
+        <Label styleClass="windowtext" text="Background: " GridPane.columnIndex="0" GridPane.rowIndex="2" />
+        <TextField styleClass="inputfield" fx:id="bgwlsample" HBox.hgrow="ALWAYS" GridPane.columnIndex="1" GridPane.rowIndex="2" prefWidth="500" />
+        <Button text="Browse" alignment="center" onAction="#browseBGWLSample" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+        <TextField styleClass="inputfield" fx:id="wlsamplebgintegration" GridPane.columnIndex="3" GridPane.rowIndex="2" maxWidth="60" />
+    </GridPane>
+    
+    <GridPane styleClass="gridpane">
+        <columnConstraints>
+            <ColumnConstraints hgrow="NEVER" />
+            <ColumnConstraints hgrow="ALWAYS" />
+            <ColumnConstraints hgrow="NEVER" />
+            <ColumnConstraints hgrow="NEVER" halignment="center" />
+        </columnConstraints>
+
+        <Label styleClass="titlelabel" text="White light spectra with light source" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="3" />
+        <Label styleClass="integrationtext" text="Integration time (s)" GridPane.columnIndex="3" GridPane.rowIndex="0" prefWidth="80" />
+        
+        <Label styleClass="windowtext" text="File: " GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.halignment="right" />
+        <TextField styleClass="inputfield" fx:id="whitelightnosample" HBox.hgrow="ALWAYS" GridPane.columnIndex="1" GridPane.rowIndex="1" prefWidth="500" />
+        <Button text="Browse" alignment="center" onAction="#browseWhiteLightNoSample" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+        <TextField styleClass="inputfield" fx:id="wlnosampleintegration" GridPane.columnIndex="3" GridPane.rowIndex="1" maxWidth="60" />
+        
+        <Label styleClass="windowtext" text="Background: " GridPane.columnIndex="0" GridPane.rowIndex="2" />
+        <TextField styleClass="inputfield" fx:id="bgwlnosample" HBox.hgrow="ALWAYS" GridPane.columnIndex="1" GridPane.rowIndex="2" prefWidth="500" />
+        <Button text="Browse" alignment="center" onAction="#browseBGWLNoSample" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+        <TextField styleClass="inputfield" fx:id="wlnosamplebgintegration" GridPane.columnIndex="3" GridPane.rowIndex="2" maxWidth="60" />
+    </GridPane>
+    
+    <VBox styleClass="lastvbox" >   
+        <GridPane styleClass="gridpane" fx:id="lastgrid">
+            <columnConstraints>
+                <ColumnConstraints hgrow="NEVER" />
+                <ColumnConstraints hgrow="ALWAYS" />
+                <ColumnConstraints hgrow="NEVER" />
+            </columnConstraints>
+
+            <Label styleClass="windowtext" text="Output directory: " GridPane.columnIndex="0" GridPane.rowIndex="0" />
+            <TextField styleClass="inputfield" fx:id="output" HBox.hgrow="ALWAYS" GridPane.columnIndex="1" GridPane.rowIndex="0" prefWidth="500" />
+            <Button text="Browse" alignment="center" onAction="#browseOutput" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+        </GridPane>
+        
+        <Label styleClass="titlelabel" fx:id="lastlabel" />
+    </VBox>
+    
+    <HBox styleClass="hbox" prefWidth="500" fx:id="startsimubox">
+        <Button text="Generate absolute intensity files" alignment="center" defaultButton="true" onAction="#calculate"/>
+    </HBox>
+</VBox>
