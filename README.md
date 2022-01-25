@@ -12,7 +12,7 @@ A software to calculate the absolute intensity of spectra taken in the integrati
 
 ## Usage
  - Chose the reference light source in the callibration light dropdown list
- - Sample spectra: enter here the files of the luminescence of your sample and the background for these experiments. Write how long was the integration on the right of the fields (only one integration time can written for the spectra files)
+ - Sample spectra: enter here all the luminescence files of your sample and the background for these experiments. Write how long was the integration on the right of the fields (only one integration time can written for the spectra files)
  - Callibration spectra: enter here the spectra taken of the callibration light selected from the dropdown menu, and the background for this experiment. Write how long was the integration on the right of the fields.
  - While light spectra with sample: enter here the spectra of the white light taken with the sample in, and the background for this experiment. Write how long was the integration on the right of the fields.
  - White light with light source: enter here the spectra taken of the white light taken with the callibration light in, and the background for this experiment. Write how long was the integration on the right of the fields.
